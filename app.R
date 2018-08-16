@@ -4,7 +4,6 @@ library(DT)
 library(shinydashboard)
 library(leaflet)
 library(rgdal)
-
 library(RColorBrewer)
 
 #library(raster)
@@ -320,7 +319,7 @@ server<-function(input,output,session){
   
   
   observe({
-    pal<-colorFactor(rainbow(7),mp$AreaTyp)
+    
     
     leafletProxy("leaf",data=fdata()) %>%
       
@@ -340,28 +339,28 @@ server<-function(input,output,session){
     
     
   })
-  dat<-mp
-  observeEvent(input$area,{
-    if(input$area!="All"){
+  #dat<-mp
+  #observeEvent(input$area,{
+    #if(input$area!="All"){
       
-      dat<-dat[dat$AreaType==input$area,]
-    }
-    else{
-      dat
-    }
-    leafletProxy("leaf",data =dat)%>%
-      clearShapes()%>%
-      addPolygons(
-        data = dat,
-        stroke = FALSE,
-        weight = 1, smoothFactor = 0.5,
-        opacity = 1.0, fillOpacity = 1.0,
-        fillColor = ~pal(AreaTyp),
-        label =~LIA
-      )
+      #dat<-dat[dat$AreaType==input$area,]
+    #}
+    #else{
+      #dat
+    #}
+    #leafletProxy("leaf",data =dat)%>%
+      #clearShapes()%>%
+      #addPolygons(
+        #data = dat,
+        #stroke = FALSE,
+        #weight = 1, smoothFactor = 0.5,
+        #opacity = 1.0, fillOpacity = 1.0,
+        #fillColor = ~pal(AreaTyp),
+        #label =~LIA
+      #)
     
     
-  })
+  #})
 }
 
 shinyApp(ui,server)
